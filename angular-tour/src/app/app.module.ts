@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ProductData } from './products/product-data';
 import { StoreModule } from '@ngrx/store';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { StoreModule } from '@ngrx/store';
   ],
   imports: [
     BrowserModule,
+    UserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
