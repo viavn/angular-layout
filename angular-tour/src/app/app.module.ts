@@ -16,6 +16,7 @@ import { PageNotFoundComponent } from './home/page-not-found/page-not-found.comp
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ProductData } from './products/product-data';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProductData } from './products/product-data';
     BrowserAnimationsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(ProductData),
+    StoreModule.forRoot({}, {}),
     // MatTabsModule,
     // MatAutocompleteModule,
     // MatGridListModule,
