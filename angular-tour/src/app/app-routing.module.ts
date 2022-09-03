@@ -13,7 +13,7 @@ const routes: Routes = [
       { path: 'welcome', component: WelcomeComponent },
       {
         path: 'products',
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
         loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
       },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },

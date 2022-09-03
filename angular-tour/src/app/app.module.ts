@@ -35,7 +35,7 @@ import { UserModule } from './user/user.module';
     BrowserAnimationsModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(ProductData),
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({}),
     // MatTabsModule,
     // MatAutocompleteModule,
     // MatGridListModule,
