@@ -9,12 +9,18 @@ export interface State extends AppState.State {
 
 export interface ProductState {
   showProductCode: boolean;
-  currentProduct: Product;
+  currentProduct: Product | null;
   products: Product[];
 }
 
+const initialState: ProductState = {
+  showProductCode: true,
+  currentProduct: null,
+  products: [],
+};
+
 export const productReducer = createReducer<ProductState>(
-  { showProductCode: true } as ProductState,
+  initialState,
   on(createAction('[Product] Toggle Product Code'), state => {
     return {
       ...state,
