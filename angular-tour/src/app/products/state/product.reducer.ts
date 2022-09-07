@@ -2,7 +2,7 @@ import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/
 import { Product } from "../product";
 
 import * as AppState from "../../state/app.state"
-import * as ProductActions from "../state/product.actions"
+import * as ProductActions from "./product.actions"
 
 export interface State extends AppState.State {
   products: ProductState;
