@@ -15,14 +15,14 @@ export interface ProductState {
   error: string;
 }
 
-const initialState: ProductState = {
+const initialState: Readonly<ProductState> = {
   showProductCode: true,
   currentProduct: null,
   products: [],
   error: '',
 };
 
-const getProductFeatureState = createFeatureSelector<ProductState>('products');
+const getProductFeatureState = createFeatureSelector<Readonly<ProductState>>('products');
 
 export const getShowProductCode = createSelector(
   getProductFeatureState,
@@ -52,10 +52,10 @@ export const productReducer = createReducer<ProductState>(
       showProductCode: !state.showProductCode
     };
   }),
-  on(ProductActions.setCurrentProduct, (state, action) => {
+  on(ProductActions.setCurrentProduct, (state, { product }) => {
     return {
       ...state,
-      currentProduct: action.product
+      currentProduct: product
     }
   }),
   on(ProductActions.clearCurrentProduct, state => {
@@ -76,18 +76,19 @@ export const productReducer = createReducer<ProductState>(
       }
     }
   }),
-  on(ProductActions.loadProductsSuccess, (state, action) => {
+  on(ProductActions.loadProductsSuccess, (state, { products }) => {
     return {
       ...state,
-      products: action.products,
+      // products
+      products: [...products],
       error: ''
     }
   }),
-  on(ProductActions.loadProductsFailure, (state, action) => {
+  on(ProductActions.loadProductsFailure, (state, { error }) => {
     return {
       ...state,
       products: [],
-      error: action.error
+      error: error
     }
   })
 );

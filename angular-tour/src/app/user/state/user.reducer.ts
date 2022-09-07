@@ -7,7 +7,7 @@ export interface UserState {
   maskUserName: boolean;
 }
 
-const initialState: UserState = {
+const initialState: Readonly<UserState> = {
   currentUser: null,
   maskUserName: false
 };
