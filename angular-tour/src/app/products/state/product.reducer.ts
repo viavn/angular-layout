@@ -4,7 +4,6 @@ import { Product } from "../product";
 import * as AppState from "../../state/app.state"
 import * as ProductActions from "../state/product.actions"
 
-
 export interface State extends AppState.State {
   products: ProductState;
 }
