@@ -8,6 +8,7 @@ import { ProductService } from '../product.service';
 import { Store } from '@ngrx/store';
 import * as ProductActions from '../state/product.actions';
 import { State, getCurrentProduct } from '../state/product.reducer';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-product-edit',
@@ -19,12 +20,11 @@ export class ProductEditComponent implements OnInit {
   errorMessage = '';
   productForm!: FormGroup;
 
-  product!: Product | null;
-
   // Use with the generic validation message class
   displayMessage: { [key: string]: string } = {};
   private validationMessages!: { [key: string]: { [key: string]: string } };
   private genericValidator!: GenericValidator;
+  product$!: Observable<Product | null>;
 
   constructor(
     private fb: FormBuilder,
@@ -63,10 +63,9 @@ export class ProductEditComponent implements OnInit {
     });
 
     // Watch for changes to the currently selected product
-    // TODO: Unsubscribe
-    this.store.select(getCurrentProduct).subscribe(
+    this.product$ = this.store.select(getCurrentProduct).pipe(tap(
       currentProduct => this.displayProduct(currentProduct)
-    );
+    ));
 
     // Watch for value changes for validation
     this.productForm.valueChanges.subscribe(
@@ -81,9 +80,6 @@ export class ProductEditComponent implements OnInit {
   }
 
   displayProduct(product: Product | null): void {
-    // Set the local product property
-    this.product = product;
-
     if (product) {
       // Reset the form back to pristine
       this.productForm.reset();
