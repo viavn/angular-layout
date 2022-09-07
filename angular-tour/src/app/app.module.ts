@@ -20,6 +20,7 @@ import { StoreModule } from '@ngrx/store';
 import { UserModule } from './user/user.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { environment } from '../environments/environment';
     HttpClientInMemoryWebApiModule.forRoot(ProductData),
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([]),
     // MatTabsModule,
     // MatAutocompleteModule,
     // MatGridListModule,
