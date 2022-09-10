@@ -3,8 +3,10 @@ import { Product } from "../product";
 
 export const toggleProductCode = createAction('[Product] Toggle Product Code');
 
-export const setCurrentProduct = createAction('[Product] Set Current Product',
-  props<{ product: Readonly<Product> }>());
+export const setCurrentProduct = createAction(
+  '[Product] Set Current Product',
+  props<{ currentProductId: Readonly<number | null> }>()
+);
 
 export const clearCurrentProduct = createAction('[Product] Clear Current Product');
 
@@ -12,8 +14,25 @@ export const initializeCurrentProduct = createAction('[Product] Initialize Curre
 
 export const loadProducts = createAction('[Product] Load');
 
-export const loadProductsSuccess = createAction('[Product] Loaded Success',
-  props<{ products: ReadonlyArray<Product> }>());
+export const loadProductsSuccess = createAction(
+  '[Product] Loaded Success',
+  props<{ products: ReadonlyArray<Product> }>()
+);
 
 export const loadProductsFailure = createAction('[Product] Load Fail',
   props<{ error: Readonly<string> }>());
+
+export const updateProduct = createAction(
+  '[Product] Update Product',
+  props<{ product: Readonly<Product> }>()
+);
+
+export const updateProductSuccess = createAction(
+  '[Product] Update Product Success',
+  props<{ product: Readonly<Product> }>()
+);
+
+export const updateProductFailure = createAction(
+  '[Product] Update Product Fail',
+  props<{ error: Readonly<string> }>()
+);
