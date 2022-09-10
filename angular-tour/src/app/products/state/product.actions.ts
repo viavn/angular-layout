@@ -51,3 +51,15 @@ export const updateProductFailure = createAction(
   '[Product] Update Product Fail',
   props<{ error: Readonly<string> }>()
 );
+
+export const deleteProduct = createAction(
+  '[Product] Delete Product',
+  props<{ productId: Readonly<number> }>()
+);
+
+export const deleteProductSuccess = createAction('[Product] Delete Product Success');
+
+export const deleteProductFailure = createAction(
+  '[Product] Delete Product Fail',
+  props<{ error: Readonly<string> }>()
+);

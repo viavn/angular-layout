@@ -1,9 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GenericValidator } from 'src/app/shared/generic-validator';
 import { NumberValidators } from 'src/app/shared/number.validator';
 import { Product } from '../product';
-import { ProductService } from '../product.service';
 
 import { Store } from '@ngrx/store';
 import * as ProductActions from '../state/product.actions';
@@ -28,7 +27,6 @@ export class ProductEditComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private productService: ProductService,
     private store: Store<State>
   ) {
 
@@ -110,10 +108,7 @@ export class ProductEditComponent implements OnInit {
   deleteProduct(product: Product): void {
     if (product && product.id) {
       if (confirm(`Really delete the product: ${product.productName}?`)) {
-        this.productService.deleteProduct(product.id).subscribe({
-          next: () => this.store.dispatch(ProductActions.clearCurrentProduct()),
-          error: err => this.errorMessage = err
-        });
+        this.store.dispatch(ProductActions.deleteProduct({ productId: product.id }));
       }
     } else {
       // No need to delete, it was never saved
