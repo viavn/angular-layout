@@ -6,7 +6,7 @@ import { Product } from '../product';
 
 import { Store } from '@ngrx/store';
 import * as ProductActions from '../state/product.actions';
-import { State, getCurrentProduct } from '../state/product.reducer';
+import { State, getCurrentProduct } from '../state';
 import { Observable, tap } from 'rxjs';
 
 @Component({
