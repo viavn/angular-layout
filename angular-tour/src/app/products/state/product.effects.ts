@@ -39,7 +39,7 @@ export class ProductEffects {
     ofType(ProductActions.deleteProduct),
     concatMap(action =>
       this.productService.deleteProduct(action.productId).pipe(
-        map(() => ProductActions.deleteProductSuccess()),
+        map(() => ProductActions.deleteProductSuccess({ productId: action.productId })),
         catchError(error => of(ProductActions.deleteProductFailure({ error })))
       )
     )

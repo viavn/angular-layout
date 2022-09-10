@@ -57,7 +57,10 @@ export const deleteProduct = createAction(
   props<{ productId: Readonly<number> }>()
 );
 
-export const deleteProductSuccess = createAction('[Product] Delete Product Success');
+export const deleteProductSuccess = createAction(
+  '[Product] Delete Product Success',
+  props<{ productId: Readonly<number> }>()
+);
 
 export const deleteProductFailure = createAction(
   '[Product] Delete Product Fail',
