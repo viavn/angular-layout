@@ -19,9 +19,9 @@ export class ProductShellComponent implements OnInit {
   constructor(private store: Store<State>) { }
 
   ngOnInit(): void {
-    this.store.dispatch(ProductPageActions.loadProducts());
     this.products$ = this.store.select(getProducts);
     this.errorMessage$ = this.store.select(getError);
+    this.store.dispatch(ProductPageActions.loadProducts());
     this.selectedProduct$ = this.store.select(getCurrentProduct);
     this.displayCode$ = this.store.select(getShowProductCode);
   }
@@ -36,5 +36,23 @@ export class ProductShellComponent implements OnInit {
 
   productSelected(product: Product): void {
     this.store.dispatch(ProductPageActions.setCurrentProduct({ currentProductId: product.id }));
+  }
+
+  clearProduct(): void {
+    this.store.dispatch(ProductPageActions.clearCurrentProduct());
+  }
+
+  deleteProduct(product: Product): void {
+    if (product.id) {
+      this.store.dispatch(ProductPageActions.deleteProduct({ productId: product.id }));
+    }
+  }
+
+  createProduct(product: Product): void {
+    this.store.dispatch(ProductPageActions.createProduct({ product }));
+  }
+
+  updateProduct(product: Product): void {
+    this.store.dispatch(ProductPageActions.updateProduct({ product }));
   }
 }

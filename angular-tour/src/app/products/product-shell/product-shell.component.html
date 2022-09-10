@@ -11,6 +11,13 @@
     ></app-product-list>
   </div>
   <div class="col-md-8">
-    <app-product-edit></app-product-edit>
+    <app-product-edit
+      [selectedProduct]="selectedProduct$ | async"
+      [errorMessage]="errorMessage$ | async"
+      (clearCurrent)="clearProduct()"
+      (update)="updateProduct($event)"
+      (create)="createProduct($event)"
+      (delete)="deleteProduct($event)"
+    ></app-product-edit>
   </div>
 </div>
