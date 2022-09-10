@@ -22,6 +22,21 @@ export const loadProductsSuccess = createAction(
 export const loadProductsFailure = createAction('[Product] Load Fail',
   props<{ error: Readonly<string> }>());
 
+export const createProduct = createAction(
+  '[Product] Create Product',
+  props<{ product: Readonly<Product> }>()
+);
+
+export const createProductSuccess = createAction(
+  '[Product] Create Product Success',
+  props<{ product: Readonly<Product> }>()
+);
+
+export const createProductFailure = createAction(
+  '[Product] Create Product Fail',
+  props<{ error: Readonly<string> }>()
+);
+
 export const updateProduct = createAction(
   '[Product] Update Product',
   props<{ product: Readonly<Product> }>()
