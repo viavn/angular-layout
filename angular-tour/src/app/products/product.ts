@@ -6,3 +6,14 @@ export interface Product {
   description: string;
   starRating: number;
 }
+
+export interface Asset {
+  id: number;
+  name: string;
+  code: string;
+}
+
+export interface Order {
+  id: number;
+  create_date: Date;
+}

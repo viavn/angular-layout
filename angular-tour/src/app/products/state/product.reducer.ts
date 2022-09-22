@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { Product } from "../product";
+import { Asset, Order, Product } from "../product";
 import { ProductApiActions, ProductPageActions } from "./actions"
 
 export interface ProductState {
@@ -7,12 +7,16 @@ export interface ProductState {
   currentProductId: number | null;
   products: Product[];
   error: string;
+  orders: Order[];
+  assets: Asset[];
 }
 
 const initialState: Readonly<ProductState> = {
   showProductCode: true,
   currentProductId: null,
   products: [],
+  assets: [],
+  orders: [],
   error: '',
 };
 
@@ -100,6 +104,25 @@ export const productReducer = createReducer<ProductState>(
     return {
       ...state,
       error
+    }
+  }),
+  on(ProductApiActions.loadAssetsSuccess, (state, { assets }) => {
+    return {
+      ...state,
+      assets: [...assets]
+    }
+  }),
+  on(ProductApiActions.loadOrdersSuccess, (state, { orders }) => {
+    return {
+      ...state,
+      orders: [...orders]
+    }
+  }),
+  on(ProductPageActions.clearAssetsAndOrders, (state) => {
+    return {
+      ...state,
+      orders: [],
+      assets: [],
     }
   }),
 );

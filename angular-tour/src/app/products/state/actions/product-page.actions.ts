@@ -29,4 +29,6 @@ export const deleteProduct = createAction(
   props<{ productId: Readonly<number> }>()
 );
 
-
+export const loadAssets = createAction('[Product Page] Load Assets');
+export const loadOrders = createAction('[Product Page] Load Orders');
+export const clearAssetsAndOrders = createAction('[Product Page] Clear Assets and Orders');

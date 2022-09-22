@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Product } from "../../product";
+import { Asset, Order, Product } from "../../product";
 
 export const loadProductsSuccess = createAction(
   '[Product API] Loaded Success',
@@ -37,4 +37,14 @@ export const deleteProductSuccess = createAction(
 export const deleteProductFailure = createAction(
   '[Product API] Delete Product Fail',
   props<{ error: Readonly<string> }>()
+);
+
+export const loadAssetsSuccess = createAction(
+  '[Product API] Load Assets Success',
+  props<{ assets: ReadonlyArray<Asset> }>()
+);
+
+export const loadOrdersSuccess = createAction(
+  '[Product API] Load Orders Success',
+  props<{ orders: ReadonlyArray<Order> }>()
 );

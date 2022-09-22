@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, map, mergeMap, of } from "rxjs";
+import { catchError, concatMap, map, mergeMap, of, tap } from "rxjs";
 import { ProductService } from "../product.service";
 import { ProductApiActions, ProductPageActions } from "./actions";
 
@@ -43,6 +43,24 @@ export class ProductEffects {
         catchError(error => of(ProductApiActions.deleteProductFailure({ error })))
       )
     )
+  ));
+
+  loadAssets$ = createEffect(() => this.actions$.pipe(
+    ofType(ProductPageActions.loadAssets),
+    mergeMap(() => this.productService.getAssets().pipe(
+      tap(() => console.log('%c hello loadAssets$', 'color: orange')),
+      map(assets => ProductApiActions.loadAssetsSuccess({ assets })),
+      // catchError(error => of(ProductApiActions.loadProductsFailure({ error })))
+    ))
+  ));
+
+  loadOrders$ = createEffect(() => this.actions$.pipe(
+    ofType(ProductPageActions.loadOrders),
+    mergeMap(() => this.productService.getOrders().pipe(
+      tap(() => console.log('%c hello loadOrders$', 'color: red')),
+      map(orders => ProductApiActions.loadOrdersSuccess({ orders })),
+      // catchError(error => of(ProductApiActions.loadProductsFailure({ error })))
+    ))
   ));
 
   constructor(

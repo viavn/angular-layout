@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Product } from '../product';
-import { getCurrentProduct, getError, getProducts, getShowProductCode, State } from '../state';
+import { Asset, Product } from '../product';
+import { getAssets, getCurrentProduct, getError, getOrders, getProducts, getShowProductCode, State } from '../state';
 import { ProductPageActions } from '../state/actions';
-import { Observable } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-shell',
@@ -15,6 +15,12 @@ export class ProductShellComponent implements OnInit {
   selectedProduct$!: Observable<Product | null>;
   displayCode$!: Observable<boolean>;
   errorMessage$!: Observable<string>;
+
+  assets$: Observable<Asset[]> = this.store.select(getAssets);
+  orders$ = this.store.select(getOrders);
+  combineAssetsAndOrders$ = combineLatest([this.assets$, this.orders$]).pipe(
+    map(([as, os]) => as.length > 0 && os.length > 0),
+  );
 
   constructor(private store: Store<State>) { }
 
@@ -54,5 +60,11 @@ export class ProductShellComponent implements OnInit {
 
   updateProduct(product: Product): void {
     this.store.dispatch(ProductPageActions.updateProduct({ product }));
+  }
+
+  dispatchCombineLatestAction(): void {
+    this.store.dispatch(ProductPageActions.clearAssetsAndOrders());
+    this.store.dispatch(ProductPageActions.loadAssets());
+    this.store.dispatch(ProductPageActions.loadOrders());
   }
 }

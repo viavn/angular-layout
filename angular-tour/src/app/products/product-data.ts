@@ -1,6 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
-import { Product } from './product';
+import { Asset, Order, Product } from './product';
 
 export class ProductData implements InMemoryDbService {
 
@@ -42,6 +42,23 @@ export class ProductData implements InMemoryDbService {
         starRating: 4.6
       }
     ];
-    return { products };
+
+    const assets: Asset[] = [];
+    const orders: Order[] = [];
+
+    for (let index = 1; index < 10; index++) {
+      assets.push({
+        id: index,
+        code: `Code${index}`,
+        name: `Asset${index}`,
+      });
+
+      orders.push({
+        id: index,
+        create_date: new Date(),
+      });
+    }
+
+    return { products, assets, orders };
   }
 }

@@ -1,20 +1,22 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
-import { Product } from './product';
+import { catchError, delay, map, Observable, of, tap, throwError } from 'rxjs';
+import { Asset, Order, Product } from './product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   private productsUrl = 'api/products';
+  private assetsUrl = 'api/assets';
+  private ordersUrl = 'api/orders';
 
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.productsUrl)
       .pipe(
-        tap(data => console.log(JSON.stringify(data))),
+        // tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError)
       );
   }
@@ -48,6 +50,23 @@ export class ProductService {
         tap(() => console.log('updateProduct: ' + product.id)),
         // Return the product on an update
         map(() => product),
+        catchError(this.handleError)
+      );
+  }
+
+  getAssets(): Observable<Asset[]> {
+    return this.http.get<Asset[]>(this.assetsUrl)
+      .pipe(
+        delay(1000),
+        // tap(data => console.log(JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
+  getOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(this.ordersUrl)
+      .pipe(
+        // tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError)
       );
   }

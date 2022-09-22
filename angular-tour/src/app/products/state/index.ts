@@ -53,3 +53,13 @@ export const getError = createSelector(
   getProductFeatureState,
   state => state.error
 );
+
+export const getAssets = createSelector(
+  getProductFeatureState,
+  state => state.assets
+);
+
+export const getOrders = createSelector(
+  getProductFeatureState,
+  state => state.orders
+);
