@@ -55,9 +55,10 @@ export class ProductService {
   }
 
   getAssets(): Observable<Asset[]> {
+    console.log('this.count', new Date());
     return this.http.get<Asset[]>(this.assetsUrl)
       .pipe(
-        delay(1000),
+        delay(20000),
         // tap(data => console.log(JSON.stringify(data))),
         catchError(this.handleError)
       );

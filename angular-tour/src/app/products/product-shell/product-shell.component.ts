@@ -67,4 +67,12 @@ export class ProductShellComponent implements OnInit {
     this.store.dispatch(ProductPageActions.loadAssets());
     this.store.dispatch(ProductPageActions.loadOrders());
   }
+
+  dispatchExhaustMapAction(): void {
+    this.store.dispatch(ProductPageActions.loadAssets());
+  }
+
+  clear(): void {
+    this.store.dispatch(ProductPageActions.clearAssetsAndOrders());
+  }
 }

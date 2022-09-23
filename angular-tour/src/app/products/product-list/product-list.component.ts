@@ -31,10 +31,10 @@ export class ProductListComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges', changes);
+    // console.log('ngOnChanges', changes);
 
     if (changes['assets']?.currentValue) {
-      console.log('ngOnChanges -> assets', this.assets);
+      // console.log('ngOnChanges -> assets', this.assets);
       this.dataSource.data = this.assets ?? [];
       // this.dataSource = new MatTableDataSource<Asset>(this.assets ?? []);
       // this.dataSource.sort = this.sort;
